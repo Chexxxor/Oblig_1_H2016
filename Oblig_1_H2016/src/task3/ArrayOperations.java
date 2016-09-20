@@ -1,6 +1,6 @@
 package task3;
 
-public class ListOperations<E extends Comparable<E>>{
+public class ArrayOperations<E extends Comparable<E>>{
 
 	public static <E extends Comparable<E>> E min(E[] list){
 		if(list == null)

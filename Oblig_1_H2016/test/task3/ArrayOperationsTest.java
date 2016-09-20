@@ -1,11 +1,11 @@
 package task3;
 
 import static org.junit.Assert.assertEquals;
-import static task3.ListOperations.min;
+import static task3.ArrayOperations.min;
 
 import org.junit.Test;
 
-public class ListOperationsTest {
+public class ArrayOperationsTest {
 
 	@Test
 	public void OneElement() {
