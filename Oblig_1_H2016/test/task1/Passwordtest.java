@@ -12,8 +12,8 @@ public class Passwordtest {
 	private String passwordOnlyNumbers = "12345";
 	private String passwordWithMixedLettersAndNumbers = "a2b3c4d5";
 	private String passwordWithSpecialChars = "$bcde%&/1234";
-	private String passwordWithNumbersFirst = "12345abcde333";
-	private String passwordWithLettersFirst = "abcde12345333";
+	private String passwordWithNumbersFirst = "123AbcDefgH12345";
+	private String passwordWithLettersFirst = "abCdefgJH12345";
 	private Password password;
 	
 	@Before
@@ -63,6 +63,7 @@ public class Passwordtest {
 		assertEquals(false, password.checkPassword(passwordWithSpecialChars));
 		assertEquals(true, password.checkPassword(passwordWithNumbersFirst));
 		assertEquals(true, password.checkPassword(passwordWithLettersFirst));
+		
 	}
 
 }
