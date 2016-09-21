@@ -13,7 +13,7 @@ public class Password {
 		return false;
 	}
 	boolean checkThatContainsAtLeastThreeDigits(String theWord) {
-		String AtLeastThreeDigitsPattern = "\\d{3,}";
+		String AtLeastThreeDigitsPattern = "\\d{3,}.*";
 		if(theWord.matches(AtLeastThreeDigitsPattern)){
 			return true;
 		}

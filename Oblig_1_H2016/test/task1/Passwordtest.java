@@ -12,7 +12,7 @@ public class Passwordtest {
 	private String passwordOnlyNumbers = "12345";
 	private String passwordWithMixedLettersAndNumbers = "a2b3c4d5";
 	private String passwordWithSpecialChars = "$bcde%&/1234";
-	private String passwordWithNumbersFirst = "123AbcDefgH12345";
+	private String passwordWithNumbersFirst = "123AbcdeFGh";
 	private String passwordWithLettersFirst = "abCdefgJH12345";
 	private Password password;
 	
@@ -50,7 +50,7 @@ public class Passwordtest {
 		assertEquals(true, password.checkThatContainsAtLeastThreeDigits(passwordOnlyNumbers));
 		assertEquals(false, password.checkThatContainsAtLeastThreeDigits(passwordWithMixedLettersAndNumbers));
 		assertEquals(false, password.checkThatContainsAtLeastThreeDigits(passwordWithSpecialChars));
-		assertEquals(false, password.checkThatContainsAtLeastThreeDigits(passwordWithNumbersFirst));
+		assertEquals(true, password.checkThatContainsAtLeastThreeDigits(passwordWithNumbersFirst));
 		assertEquals(false, password.checkThatContainsAtLeastThreeDigits(passwordWithLettersFirst));
 	}
 	
@@ -62,7 +62,7 @@ public class Passwordtest {
 		assertEquals(false, password.checkPassword(passwordWithMixedLettersAndNumbers));
 		assertEquals(false, password.checkPassword(passwordWithSpecialChars));
 		assertEquals(true, password.checkPassword(passwordWithNumbersFirst));
-		assertEquals(true, password.checkPassword(passwordWithLettersFirst));
+		assertEquals(false, password.checkPassword(passwordWithLettersFirst));
 		
 	}
 
