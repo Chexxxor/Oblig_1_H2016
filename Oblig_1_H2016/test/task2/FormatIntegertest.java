@@ -43,26 +43,26 @@ public class FormatIntegertest {
 				{19,2,"19", 2},//ok
 				{22,2,"22", 2},//ok
 				{23,4,"0023", 2},//ok
-				{23,5,"00023", 2},//ok
-				{23,6,"000023", 2},//ok
-				{23,7,"0000023", 2},//ok
-				{23,8,"00000023", 2},//ok
+				{26,5,"00026", 2},//ok
+				{233,6,"000233", 3},//ok
+				{2215,7,"0002215", 4},//ok
+				{24291,8,"00024291", 5},//ok
 		});
 	}
 	
 	
-	
 	@Test
 	public void testFormat(){
-		assertEquals(expectedResult, formatinteger.format(inputNumber, inputWidth));
-		
 		actual_length = inputLength;
 		length_recived = formatinteger.len(inputNumber);
+		
+		assertEquals(expectedResult, formatinteger.format(inputNumber, inputWidth));
+		assertEquals(actual_length, formatinteger.len(inputNumber));
 		
 		System.out.println("Input is: " + inputNumber + " "
 							+ "Width is: " + inputWidth + " "
 							+ "Return is: " + formatinteger.format(inputNumber, inputWidth) + " "
-							+ "Length the same: " + (length_recived == actual_length));
+							+ "Correct length: " + (length_recived == actual_length));
 	}
 
 }
