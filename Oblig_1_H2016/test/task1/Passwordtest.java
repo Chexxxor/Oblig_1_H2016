@@ -9,11 +9,11 @@ import org.junit.Test;
 public class Passwordtest {
 	private String passwordShort = "a1";
 	private String passwordOnlyLetters = "abcde";
-	private String passwordOnlyNumbers = "12345";
-	private String passwordWithMixedLettersAndNumbers = "a222b322c4d";
+	private String passwordOnlyNumbers = "12345a";
+	private String passwordWithMixedLettersAndNumbers = "a222b322c4d"; //Good password
 	private String passwordWithSpecialChars = "$bcde%&/1234";
-	private String passwordWithNumbersFirst = "123AbcdeFGh";
-	private String passwordWithLettersFirst = "abCdefgJH12345";
+	private String passwordWithNumbersFirst = "123AbcdeFGh"; //Good password
+	private String passwordWithLettersFirst = "abCdefgJH12345"; //Good Password
 	private Password password;
 	
 	@Before
@@ -48,10 +48,10 @@ public class Passwordtest {
 		assertEquals(false, password.checkThatContainsAtLeastThreeDigits(passwordShort));
 		assertEquals(false, password.checkThatContainsAtLeastThreeDigits(passwordOnlyLetters));
 		assertEquals(true, password.checkThatContainsAtLeastThreeDigits(passwordOnlyNumbers));
-		assertEquals(false, password.checkThatContainsAtLeastThreeDigits(passwordWithMixedLettersAndNumbers));
-		assertEquals(false, password.checkThatContainsAtLeastThreeDigits(passwordWithSpecialChars));
+		assertEquals(true, password.checkThatContainsAtLeastThreeDigits(passwordWithMixedLettersAndNumbers));
+		assertEquals(true, password.checkThatContainsAtLeastThreeDigits(passwordWithSpecialChars));
 		assertEquals(true, password.checkThatContainsAtLeastThreeDigits(passwordWithNumbersFirst));
-		assertEquals(false, password.checkThatContainsAtLeastThreeDigits(passwordWithLettersFirst));
+		assertEquals(true, password.checkThatContainsAtLeastThreeDigits(passwordWithLettersFirst));
 	}
 	
 	@Test
@@ -59,10 +59,10 @@ public class Passwordtest {
 		assertEquals(false, password.checkPassword(passwordShort));
 		assertEquals(false, password.checkPassword(passwordOnlyLetters));
 		assertEquals(false, password.checkPassword(passwordOnlyNumbers));
-		assertEquals(false, password.checkPassword(passwordWithMixedLettersAndNumbers));
+		assertEquals(true, password.checkPassword(passwordWithMixedLettersAndNumbers));
 		assertEquals(false, password.checkPassword(passwordWithSpecialChars));
 		assertEquals(true, password.checkPassword(passwordWithNumbersFirst));
-		assertEquals(false, password.checkPassword(passwordWithLettersFirst));
+		assertEquals(true, password.checkPassword(passwordWithLettersFirst));
 		
 	}
 
