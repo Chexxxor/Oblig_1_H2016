@@ -10,12 +10,12 @@ public class ArrayOperationsTest {
 	@Test
 	public void OneElement() {
 		Integer[] intArr = {0};
-		assertEquals(0, min(intArr), 0);
+		assertEquals(0, (float) min(intArr), 0);
 	}
 	@Test
 	public void SeveralElements() {
 		Integer[] intArr = {3, 2, 5};
-		assertEquals(2, min(intArr), 0);
+		assertEquals(2, (float) min(intArr), 0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
