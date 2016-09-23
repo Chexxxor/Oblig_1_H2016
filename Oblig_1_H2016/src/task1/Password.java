@@ -13,7 +13,11 @@ public class Password {
 		return false;
 	}
 	boolean checkThatContainsAtLeastThreeDigits(String theWord) {
-		String AtLeastThreeDigitsPattern = "\\d{3,}.*";
+		// Added a little here so this code actually works!
+		// But it still only gives true if you have 3 digits in a row.
+		// Did not change this more since its part of the solution example.
+		// But it does not work as stated in the book. If we want it like that we need to change more.
+		String AtLeastThreeDigitsPattern = ".*\\d{3,}.*";
 		if(theWord.matches(AtLeastThreeDigitsPattern)){
 			return true;
 		}
