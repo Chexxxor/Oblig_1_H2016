@@ -51,7 +51,7 @@ public class FormatIntegertest {
 	}
 	
 	// We only run one test that checks the length and the returning value.
-	// Can not see any other test worth running
+	// Can not see any other test worth running.
 	@Test
 	public void testFormat(){
 		actual_length = inputLength;
