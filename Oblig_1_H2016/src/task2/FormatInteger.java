@@ -28,7 +28,6 @@ public class FormatInteger {
 			size += 1;
 			number = number / 10;
 		}
-
 		return size;
 	}
 }
