@@ -2,6 +2,7 @@ package task4;
 
 import java.util.Stack;
 // Listing 20.9 in Liang is used as blueprint
+// Should come out quite similar to the method described in the exercise.
 
 public class EvaluateExpression {
 
@@ -20,33 +21,21 @@ public class EvaluateExpression {
 		// Holders for operands, operators and tokens
 		Stack<Integer> operandStack = new Stack<>();
 		Stack<Character> operatorStack = new Stack<>();
-		expression = insertBlanks(expression);
+		//expression = insertBlanks(expression);
 		String[] tokens = insertBlanks(expression).split(" ");
 		
-		// Sorting the tokens
+		// Sorting the tokens - operands and operators
 		for(String token: tokens){
 			if(token.length() == 0){
 				continue;
 			}
 			else if(token.charAt(0) == '+' || token.charAt(0) == '-'){
-				while(!operatorStack.isEmpty() && (
-						operatorStack.peek() == '+' ||
-						operatorStack.peek() == '-' ||
-						operatorStack.peek() == '*' ||
-						operatorStack.peek() == '/' ||
-						operatorStack.peek() == '%')){
-					processOperator(operandStack, operatorStack);
-				}
 				operatorStack.push(token.charAt(0));
+				processOperator(operandStack, operatorStack);
 			}
 			else if(token.charAt(0) == '*' || token.charAt(0) == '/' || token.charAt(0) == '%'){
-				while(!operatorStack.isEmpty() && (
-						operatorStack.peek() == '*' ||
-						operatorStack.peek() == '/') ||
-						operatorStack.peek() == '%'){
-						processOperator(operandStack, operatorStack);
-				}
 				operatorStack.push(token.charAt(0));
+				processOperator(operandStack, operatorStack);
 			}
 			else { operandStack.push(new Integer(token));}
 		}
@@ -55,18 +44,7 @@ public class EvaluateExpression {
 			processOperator(operandStack, operatorStack);
 		}
 		
-		/*// Debugging purposes only
-		System.out.println("Tokens:");
-		System.out.println(tokens);
-		System.out.println("Operands:");
-		System.out.println(operandStack);
-		System.out.println("Operators:");
-		System.out.println(operatorStack);
-		// Debugging stops
-		*/
-		
-		
-		System.out.println("RESULT:"); // Just for debugging purposes
+		System.out.println("RESULT:"); 
 		return operandStack.pop();
 	}
 
@@ -78,12 +56,6 @@ public class EvaluateExpression {
 		int operandOne = operandStack.pop();
 		int operandTwo = operandStack.pop();
 		
-		// Debugging purposes only
-		System.out.println("Operator: " + operator);
-		System.out.println("Operand 1: " + operandOne);
-		System.out.println("Operand 2: " + operandTwo);
-		// Debugging stops
-		
 		if(operator == '+')
 			operandStack.push(operandTwo + operandOne);
 		else if(operator == '-')
@@ -93,13 +65,10 @@ public class EvaluateExpression {
 		else if(operator == '/')
 			operandStack.push(operandTwo / operandOne);
 		else if(operator == '%')
-			operandStack.push(operandTwo % operandOne);
-		
-		
+			operandStack.push(operandTwo % operandOne);		
 	}
 	public static String insertBlanks(String s) {
 		String result = "";
-		
 		for(int i = 0; i < s.length(); i++){
 			if(s.charAt(i) == '+' ||s.charAt(i) == '-' || s.charAt(i) == '*'
 					|| s.charAt(i) == '/' || s.charAt(i) == '%'){
