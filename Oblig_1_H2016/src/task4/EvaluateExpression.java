@@ -1,6 +1,7 @@
 package task4;
 
 import java.util.Stack;
+// Listing 20.9 in Liang is used as blueprint
 
 public class EvaluateExpression {
 
@@ -19,8 +20,8 @@ public class EvaluateExpression {
 		// Holders for operands, operators and tokens
 		Stack<Integer> operandStack = new Stack<>();
 		Stack<Character> operatorStack = new Stack<>();
-		String[] tokens = expression.split(" ");
 		
+		String[] tokens = expression.split(" ");
 		
 		// Sorting the tokens
 		for(String token: tokens){
@@ -30,15 +31,12 @@ public class EvaluateExpression {
 			else if(token.charAt(0) == '+' || token.charAt(0) == '-'){
 				while(!operatorStack.isEmpty() && (
 						operatorStack.peek() == '+' ||
-						operatorStack.peek() == '-' ||
-						operatorStack.peek() == '*' ||
-						operatorStack.peek() == '/' ||
-						operatorStack.peek() == '%')){
+						operatorStack.peek() == '-' )){
 					processOperator(operandStack, operatorStack);
 				}
 				operatorStack.push(token.charAt(0));
 			}
-			else if(token.charAt(0) == '*' || token.charAt(0) == '/'){
+			else if(token.charAt(0) == '*' || token.charAt(0) == '/' || token.charAt(0) == '%'){
 				while(!operatorStack.isEmpty() && (
 						operatorStack.peek() == '*' ||
 						operatorStack.peek() == '/') ||
@@ -84,7 +82,6 @@ public class EvaluateExpression {
 		
 		if(operator == '+'){
 			operandStack.push(operandTwo + operandOne);
-			System.out.println();
 		}
 		else if(operator == '-'){
 			operandStack.push(operandTwo - operandOne);
@@ -99,5 +96,17 @@ public class EvaluateExpression {
 			operandStack.push(operandTwo % operandOne);
 		}
 		
+	}
+	public static String insertBlanks(String s) {
+		String result = "";
+		
+		for(int i = 0; i < s.length(); i++){
+			if(s.charAt(i) == '+' ||s.charAt(i) == '-' || s.charAt(i) == '*'
+					|| s.charAt(i) == '/' || s.charAt(i) == '%'){
+				result = " " + s.charAt(i) + " ";
+			}
+			else result += s.charAt(i);
+		}
+		return result;
 	}
 }
