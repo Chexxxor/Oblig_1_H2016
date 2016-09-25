@@ -1,10 +1,10 @@
 package task4;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
 // Listing 20.9 in Liang is used as blueprint
-// Should come out quite similar to the method described in the exercise.
-
-public class EvaluateExpression {
+// Input in form: 5 5 * 4 - 4 4 + -
+// In normal form: (5*5 - 4) - (4 + 4)
+public class EvaluateExpression{
 
 	public static void main(String[] args) {
 		try{
@@ -19,8 +19,10 @@ public class EvaluateExpression {
 
 	public static int evaluateExpression(String expression){
 		// Holders for operands, operators and tokens
-		Stack<Integer> operandStack = new Stack<>();
-		Stack<Character> operatorStack = new Stack<>();
+		ArrayDeque<Integer> operandStack = new ArrayDeque<Integer>();
+		ArrayDeque<Character> operatorStack = new ArrayDeque<Character>();
+		//Stack<Integer> operandStack = new Stack<>();
+		//Stack<Character> operatorStack = new Stack<>();
 		//expression = insertBlanks(expression);
 		String[] tokens = insertBlanks(expression).split(" ");
 		
@@ -33,24 +35,24 @@ public class EvaluateExpression {
 				operatorStack.push(token.charAt(0));
 				processOperator(operandStack, operatorStack);
 			}
-			else if(token.charAt(0) == '*' || token.charAt(0) == '/' || token.charAt(0) == '%'){
+			else if(token.charAt(0) == '*' || token.charAt(0) == '/'){
 				operatorStack.push(token.charAt(0));
 				processOperator(operandStack, operatorStack);
 			}
-			else { operandStack.push(new Integer(token));}
+			else {operandStack.push(new Integer(token));}
 		}
-		
+		/*
 		while(!operatorStack.isEmpty()){
 			processOperator(operandStack, operatorStack);
 		}
-		
+		*/
 		System.out.println("RESULT:"); 
 		return operandStack.pop();
 	}
 
 
-	public static void processOperator(Stack<Integer> operandStack,
-			Stack<Character> operatorStack) {
+	public static void processOperator(ArrayDeque<Integer> operandStack,
+			ArrayDeque<Character> operatorStack) {
 		
 		char operator = operatorStack.pop();
 		int operandOne = operandStack.pop();
@@ -63,9 +65,7 @@ public class EvaluateExpression {
 		else if(operator == '*')
 			operandStack.push(operandTwo * operandOne);
 		else if(operator == '/')
-			operandStack.push(operandTwo / operandOne);
-		else if(operator == '%')
-			operandStack.push(operandTwo % operandOne);		
+			operandStack.push(operandTwo / operandOne);	
 	}
 	public static String insertBlanks(String s) {
 		String result = "";
