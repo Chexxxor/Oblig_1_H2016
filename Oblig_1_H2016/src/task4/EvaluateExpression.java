@@ -19,8 +19,8 @@ public class EvaluateExpression{
 
 	public static int evaluateExpression(String expression){
 		// Holders for operands, operators and tokens
-		ArrayDeque<Integer> operandStack = new ArrayDeque<Integer>();
-		ArrayDeque<Character> operatorStack = new ArrayDeque<Character>();
+		ArrayDeque<Integer> operandDeque = new ArrayDeque<Integer>();
+		ArrayDeque<Character> operatorDeque = new ArrayDeque<Character>();
 		//Stack<Integer> operandStack = new Stack<>();
 		//Stack<Character> operatorStack = new Stack<>();
 		expression = expression.trim();
@@ -33,41 +33,45 @@ public class EvaluateExpression{
 					continue;
 				}
 				else if(token.charAt(0) == '+' || token.charAt(0) == '-'){
-					operatorStack.push(token.charAt(0));
-					processOperator(operandStack, operatorStack);
+					while(operandDeque.size() >= 2){
+					operatorDeque.push(token.charAt(0));
+					processOperator(operandDeque, operatorDeque);
+					}
 				}
 				else if(token.charAt(0) == '*' || token.charAt(0) == '/'){
-					operatorStack.push(token.charAt(0));
-					processOperator(operandStack, operatorStack);
+					while(operandDeque.size() >= 2){
+						operatorDeque.push(token.charAt(0));
+						processOperator(operandDeque, operatorDeque);
+						}
 				}
-				else {operandStack.push(new Integer(token));}
+				else {operandDeque.push(new Integer(token));}
 			}
 			
-			while(!operatorStack.isEmpty()){
-			processOperator(operandStack, operatorStack);
+			while(!operatorDeque.isEmpty()){
+			processOperator(operandDeque, operatorDeque);
 			}
 			
-		return operandStack.pop();
+		return operandDeque.pop();
 		}
 		else return 0;
 	}
 
 
-	public static void processOperator(ArrayDeque<Integer> operandStack,
-			ArrayDeque<Character> operatorStack) {
+	public static void processOperator(ArrayDeque<Integer> operandDeque,
+			ArrayDeque<Character> operatorDeque) {
 		
-		char operator = operatorStack.pop();
-		int operandOne = operandStack.pop();
-		int operandTwo = operandStack.pop();
+		char operator = operatorDeque.pop();
+		int operandOne = operandDeque.pop();
+		int operandTwo = operandDeque.pop();
 		
 		if(operator == '+')
-			operandStack.push(operandTwo + operandOne);
+			operandDeque.push(operandTwo + operandOne);
 		else if(operator == '-')
-			operandStack.push(operandTwo - operandOne);
+			operandDeque.push(operandTwo - operandOne);
 		else if(operator == '*')
-			operandStack.push(operandTwo * operandOne);
+			operandDeque.push(operandTwo * operandOne);
 		else if(operator == '/')
-			operandStack.push(operandTwo / operandOne);	
+			operandDeque.push(operandTwo / operandOne);	
 	}
 	public static String insertBlanks(String s) {
 		String result = "";
