@@ -23,31 +23,33 @@ public class EvaluateExpression{
 		ArrayDeque<Character> operatorStack = new ArrayDeque<Character>();
 		//Stack<Integer> operandStack = new Stack<>();
 		//Stack<Character> operatorStack = new Stack<>();
-		//expression = insertBlanks(expression);
-		String[] tokens = insertBlanks(expression).split(" ");
+		expression = expression.trim();
+		if(expression.length() > 0){
+			String[] tokens = insertBlanks(expression).trim().split(" ");;
 		
-		// Sorting the tokens - operands and operators
-		for(String token: tokens){
-			if(token.length() == 0){
-				continue;
+			// Sorting the tokens - operands and operators
+			for(String token: tokens){
+				if(token.length() == 0){
+					continue;
+				}
+				else if(token.charAt(0) == '+' || token.charAt(0) == '-'){
+					operatorStack.push(token.charAt(0));
+					processOperator(operandStack, operatorStack);
+				}
+				else if(token.charAt(0) == '*' || token.charAt(0) == '/'){
+					operatorStack.push(token.charAt(0));
+					processOperator(operandStack, operatorStack);
+				}
+				else {operandStack.push(new Integer(token));}
 			}
-			else if(token.charAt(0) == '+' || token.charAt(0) == '-'){
-				operatorStack.push(token.charAt(0));
-				processOperator(operandStack, operatorStack);
-			}
-			else if(token.charAt(0) == '*' || token.charAt(0) == '/'){
-				operatorStack.push(token.charAt(0));
-				processOperator(operandStack, operatorStack);
-			}
-			else {operandStack.push(new Integer(token));}
-		}
-		/*
-		while(!operatorStack.isEmpty()){
+			
+			while(!operatorStack.isEmpty()){
 			processOperator(operandStack, operatorStack);
-		}
-		*/
-		System.out.println("RESULT:"); 
+			}
+			
 		return operandStack.pop();
+		}
+		else return 0;
 	}
 
 
