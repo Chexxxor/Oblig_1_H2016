@@ -1,10 +1,10 @@
 package task4;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
 // Listing 20.9 in Liang is used as blueprint
-// Should come out quite similar to the method described in the exercise.
-
-public class EvaluateExpression {
+// Input in form: 5 5 * 4 - 4 4 + -
+// In normal form: (5*5 - 4) - (4 + 4)
+public class EvaluateExpression{
 	public static void main(String[] args) {
 		try{
 			System.out.println(evaluateExpression(args[0]));
@@ -16,46 +16,49 @@ public class EvaluateExpression {
 
 	public static int evaluateExpression(String expression){
 		// Holders for operands, operators and tokens
-		Stack<Integer> operandStack = new Stack<>();
-		Stack<Character> operatorStack = new Stack<>();
-		//expression = insertBlanks(expression);
-		String[] tokens = insertBlanks(expression).split(" ");
+		ArrayDeque<Integer> operandDeque = new ArrayDeque<Integer>();
+		ArrayDeque<Character> operatorDeque = new ArrayDeque<Character>();
+		//Stack<Integer> operandStack = new Stack<>();
+		//Stack<Character> operatorStack = new Stack<>();
+		expression = expression.trim();
+		if(expression.length() > 0){
+			String[] tokens = insertBlanks(expression).trim().split(" ");
+			System.out.println();
 		
-		System.out.println();
-		
-		// Sorting the tokens - operands and operators
-		for(String token: tokens){
-			if(token.length() == 0){
-				continue;
+			// Sorting the tokens - operands and operators
+			for(String token: tokens){
+				if(token.length() == 0){
+					continue;
+				}
+				else if(token.charAt(0) == '+' ||
+						token.charAt(0) == '-' ||
+						token.charAt(0) == '*' ||
+						token.charAt(0) == '/' ||
+						token.charAt(0) == '%')
+				{
+					operatorDeque.push(token.charAt(0));
+					processOperator(operandDeque, operatorDeque);
+				}
+				else operandDeque.push(new Integer(token));
 			}
-			else if(token.charAt(0) == '+' ||
-					token.charAt(0) == '-' ||
-					token.charAt(0) == '*' ||
-					token.charAt(0) == '/' ||
-					token.charAt(0) == '%')
-			{
-				operatorStack.push(token.charAt(0));
-				processOperator(operandStack, operatorStack);
+
+			while(!operatorDeque.isEmpty()){
+			processOperator(operandDeque, operatorDeque);
 			}
-			else { operandStack.push(new Integer(token));}
-		}
 		
-		while(!operatorStack.isEmpty()){
-			processOperator(operandStack, operatorStack);
-		}
-		
-		Integer result = operandStack.pop();
-		System.out.println("RESULT: " + result); 
+		Integer result = operandDeque.pop();
+		System.out.println("RESULT: " + result);
 		return result;
+		}
+		else return 0;
 	}
 
-	public static void processOperator(Stack<Integer> operandStack,
-			Stack<Character> operatorStack)
-	{
+	public static void processOperator(ArrayDeque<Integer> operandDeque,
+			ArrayDeque<Character> operatorDeque) {
 		
-		char operator = operatorStack.pop();
-		int operandOne = operandStack.pop();
-		int operandTwo = operandStack.pop();
+		char operator = operatorDeque.pop();
+		int operandOne = operandDeque.pop();
+		int operandTwo = operandDeque.pop();
 		int result = 0;
 		
 		switch(operator){
@@ -75,7 +78,7 @@ public class EvaluateExpression {
 			result = operandTwo % operandOne;
 			break;
 		}
-		operandStack.push(result);
+		operandDeque.push(result);
 	}
 	public static String insertBlanks(String s) {
 		String result = "";
