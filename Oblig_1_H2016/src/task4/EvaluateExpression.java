@@ -15,11 +15,8 @@ public class EvaluateExpression{
 	}
 
 	public static int evaluateExpression(String expression){
-		// Holders for operands, operators and tokens
 		ArrayDeque<Integer> operandDeque = new ArrayDeque<Integer>();
-		ArrayDeque<Character> operatorDeque = new ArrayDeque<Character>();
-		//Stack<Integer> operandStack = new Stack<>();
-		//Stack<Character> operatorStack = new Stack<>();
+
 		expression = expression.trim();
 		if(expression.length() > 0){
 			String[] tokens = insertBlanks(expression).trim().split(" ");
@@ -31,14 +28,9 @@ public class EvaluateExpression{
 					continue;
 				}
 				else if(token.matches("[+*/-]")){
-					operatorDeque.push(token.charAt(0));
-					processOperator(operandDeque, operatorDeque);
+					processOperator(operandDeque, token.charAt(0));
 				}
 				else operandDeque.push(new Integer(token));
-			}
-
-			while(!operatorDeque.isEmpty()){
-			processOperator(operandDeque, operatorDeque);
 			}
 		
 		Integer result = operandDeque.pop();
@@ -52,6 +44,29 @@ public class EvaluateExpression{
 			ArrayDeque<Character> operatorDeque) {
 		
 		char operator = operatorDeque.pop();
+		int operandOne = operandDeque.pop();
+		int operandTwo = operandDeque.pop();
+		int result = 0;
+		
+		switch(operator){
+		case '+':
+			result = operandTwo + operandOne;
+			break;
+		case '-':
+			result = operandTwo - operandOne;
+			break;
+		case '*':
+			result = operandTwo * operandOne;
+			break;
+		case '/':
+			result = operandTwo / operandOne;
+			break;
+		}
+		operandDeque.push(result);
+	}
+	public static void processOperator(ArrayDeque<Integer> operandDeque,
+			char operator) {
+		
 		int operandOne = operandDeque.pop();
 		int operandTwo = operandDeque.pop();
 		int result = 0;
