@@ -28,12 +28,17 @@ public class EvaluateExpression{
 					continue;
 				}
 				else if(token.matches("[+*/-]")){
+					while(operandDeque.size() < 2){
+						throw new IllegalArgumentException("Too many operators!");
+					}
 					processOperator(operandDeque, token.charAt(0));
 				}
 				else operandDeque.push(new Integer(token));
 			}
 		
 		Integer result = operandDeque.pop();
+		if(!operandDeque.isEmpty())
+			throw new IllegalArgumentException("Too many numbers!");
 		System.out.println("RESULT: " + result);
 		return result;
 		}
