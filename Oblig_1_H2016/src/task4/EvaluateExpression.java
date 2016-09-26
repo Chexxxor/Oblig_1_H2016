@@ -41,30 +41,6 @@ public class EvaluateExpression{
 	}
 
 	public static void processOperator(ArrayDeque<Integer> operandDeque,
-			ArrayDeque<Character> operatorDeque) {
-		
-		char operator = operatorDeque.pop();
-		int operandOne = operandDeque.pop();
-		int operandTwo = operandDeque.pop();
-		int result = 0;
-		
-		switch(operator){
-		case '+':
-			result = operandTwo + operandOne;
-			break;
-		case '-':
-			result = operandTwo - operandOne;
-			break;
-		case '*':
-			result = operandTwo * operandOne;
-			break;
-		case '/':
-			result = operandTwo / operandOne;
-			break;
-		}
-		operandDeque.push(result);
-	}
-	public static void processOperator(ArrayDeque<Integer> operandDeque,
 			char operator) {
 		
 		int operandOne = operandDeque.pop();
