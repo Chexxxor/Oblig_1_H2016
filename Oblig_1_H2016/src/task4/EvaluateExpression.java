@@ -30,12 +30,7 @@ public class EvaluateExpression{
 				if(token.length() == 0){
 					continue;
 				}
-				else if(token.charAt(0) == '+' ||
-						token.charAt(0) == '-' ||
-						token.charAt(0) == '*' ||
-						token.charAt(0) == '/' ||
-						token.charAt(0) == '%')
-				{
+				else if(token.matches("[+*/-]")){
 					operatorDeque.push(token.charAt(0));
 					processOperator(operandDeque, operatorDeque);
 				}
@@ -73,9 +68,6 @@ public class EvaluateExpression{
 			break;
 		case '/':
 			result = operandTwo / operandOne;
-			break;
-		case '%':
-			result = operandTwo % operandOne;
 			break;
 		}
 		operandDeque.push(result);
