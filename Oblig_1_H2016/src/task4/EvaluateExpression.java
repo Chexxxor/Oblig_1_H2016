@@ -28,7 +28,7 @@ public class EvaluateExpression{
 					continue;
 				}
 				else if(token.matches("[+*/-]")){
-					while(operandDeque.size() < 2){
+					if(operandDeque.size() < 2){
 						throw new IllegalArgumentException("Too many operators!");
 					}
 					processOperator(operandDeque, token.charAt(0));
