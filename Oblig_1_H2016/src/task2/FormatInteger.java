@@ -11,6 +11,7 @@ public class FormatInteger {
 		int width = input.nextInt();
 
 		System.out.println("The formatted number is " + format(number, width));
+		input.close();
 	}
 	public static String format(int number, int width) {
 		String result = number + "";

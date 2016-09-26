@@ -1,9 +1,7 @@
 package task4;
 
 import java.util.ArrayDeque;
-// Listing 20.9 in Liang is used as blueprint
-// Input in form: 5 5 * 4 - 4 4 + -
-// In normal form: (5*5 - 4) - (4 + 4)
+
 public class EvaluateExpression{
 	public static void main(String[] args) {
 		try{
@@ -20,9 +18,7 @@ public class EvaluateExpression{
 		expression = expression.trim();
 		if(expression.length() > 0){
 			String[] tokens = insertBlanks(expression).trim().split(" ");
-			System.out.println();
 		
-			// Sorting the tokens - operands and operators
 			for(String token: tokens){
 				if(token.length() == 0){
 					continue;
@@ -35,12 +31,11 @@ public class EvaluateExpression{
 				}
 				else operandDeque.push(new Integer(token));
 			}
-		
-		Integer result = operandDeque.pop();
-		if(!operandDeque.isEmpty())
-			throw new IllegalArgumentException("Too many numbers!");
-		System.out.println("RESULT: " + result);
-		return result;
+			
+			Integer result = operandDeque.pop();
+			if(!operandDeque.isEmpty())
+				throw new IllegalArgumentException("Too many numbers!");
+			return result;
 		}
 		else return 0;
 	}
@@ -95,8 +90,7 @@ public class EvaluateExpression{
 	public static String insertBlanks(String s) {
 		String result = "";
 		for(int i = 0; i < s.length(); i++){
-			if(s.charAt(i) == '+' ||s.charAt(i) == '-' || s.charAt(i) == '*'
-					|| s.charAt(i) == '/' || s.charAt(i) == '%'){
+			if(("" + s.charAt(i)).matches("[+*/-]")){
 				result += " " + s.charAt(i) + " ";
 			}
 			else result += s.charAt(i);

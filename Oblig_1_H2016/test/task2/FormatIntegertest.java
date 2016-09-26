@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import org.junit.runner.RunWith;
@@ -20,12 +19,6 @@ public class FormatIntegertest {
 	private int length_recived;
 	private String expectedResult;
 	private int actual_length;
-	private FormatInteger formatinteger;
-	
-	@Before
-	public void initialize(){
-		formatinteger = new FormatInteger();
-	}
 	
 	public FormatIntegertest(int inputNumber,int inputWidth, String expectedResult, int inputLength){
 		this.inputNumber = inputNumber;
@@ -55,14 +48,14 @@ public class FormatIntegertest {
 	@Test
 	public void testFormat(){
 		actual_length = inputLength;
-		length_recived = formatinteger.len(inputNumber);
+		length_recived = FormatInteger.len(inputNumber);
 		
-		assertEquals(expectedResult, formatinteger.format(inputNumber, inputWidth));
-		assertEquals(actual_length, formatinteger.len(inputNumber));
+		assertEquals(expectedResult, FormatInteger.format(inputNumber, inputWidth));
+		assertEquals(actual_length, FormatInteger.len(inputNumber));
 		
 		System.out.println("Input is: " + inputNumber + " "
 							+ "Width is: " + inputWidth + " "
-							+ "Return is: " + formatinteger.format(inputNumber, inputWidth) + " "
+							+ "Return is: " + FormatInteger.format(inputNumber, inputWidth) + " "
 							+ "Correct length: " + (length_recived == actual_length));
 	}
 

@@ -39,5 +39,4 @@ public class EvaluateExpressiontest {
 	public void test() {
 		assertEquals(expected, evaluateExpression(input));
 	}
-
 }
